@@ -1,0 +1,20 @@
+pandas 
+mlflow
+notebook
+dvc-s3
+numpy
+scikit-learn
+matplotlib
+python-box
+pyYAML
+tqdm
+ensure
+joblib
+types-PyYAML
+Flask
+dvc
+xgboost
+catboost
+seaborn
+# Flask-Cors
+# -e .
