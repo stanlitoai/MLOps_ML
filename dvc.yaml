@@ -1,0 +1,53 @@
+stages:
+  data_ingestion:
+    cmd: python src/mlhrtds/pipeline/stage_01_data_ingestion.py
+    deps:
+      - src/mlhrtds/pipeline/stage_01_data_ingestion.py
+      - config/config.yaml
+    outs:
+      - artifacts/data_ingestion/data.csv
+
+
+  data_validation:
+    cmd: python src/mlhrtds/pipeline/stage_02_data_validation.py
+    deps:
+      - src/mlhrtds/pipeline/stage_02_data_validation.py
+      - config/config.yaml
+    outs:
+      - artifacts/data_validation
+
+
+  data_transformation:
+    cmd: src/mlhrtds/pipeline/stage_03_feature_engineering.py.py
+    deps:
+      - src/mlhrtds/pipeline/stage_03_feature_engineering.py.py
+      - config/config.yaml
+    outs:
+      - artifacts/data_transformation
+
+
+
+  training:
+    cmd: python src/mlhrtds/pipeline/stage_04_model_training.py
+    deps:
+      - src/mlhrtds/pipeline/stage_04_model_training.py
+      - config/config.yaml
+      - artifacts/data_transformation/X_train.csv
+      - artifacts/data_transformation/y_train.csv
+    outs:
+      - artifacts/model_trainer/model.joblib
+
+
+  
+
+  evaluation:
+    cmd: python src/mlhrtds/pipeline/stage_05_model_evaluation.py
+    deps:
+      - src/mlhrtds/pipeline/stage_05_model_evaluation.py
+      - config/config.yaml
+      - artifacts/data_transformation/X_test.csv
+      - artifacts/data_transformation/y_test.csv
+      - artifacts/model_trainer/model.joblib
+   
+    metrics:
+    - artifacts/model_evaluation/metrics.json
