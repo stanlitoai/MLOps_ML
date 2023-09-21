@@ -3,7 +3,7 @@ from mlhrtds.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeli
 from mlhrtds.pipeline.stage_02_data_validation import DataValidationTrainingPipeline
 from mlhrtds.pipeline.stage_03_feature_engineering import FeatureEngineeringTrainingPipeline
 from mlhrtds.pipeline.stage_04_model_training import *
-# from mlds.pipeline.stage_05_model_evaluation import ModelEvaluationTrainingPipeline
+from mlhrtds.pipeline.stage_05_model_evaluation import ModelEvaluationTrainingPipeline
 
 
 
@@ -61,6 +61,22 @@ try:
     obj = ModelTrainingPipeline()
     obj.main()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<<<<\n\nx====================================================x")
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+
+
+STAGE_NAME = "Model Evaluation stage"
+
+
+
+try:
+    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<<<<")
+    obj = ModelEvaluationTrainingPipeline()
+    obj.main()
+    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<<<<\n\nx====================================================x")
+    logger.info(f">>>>>>Proceede to deployment stage <<<<<<<<<\n\nx====================================================x")
 except Exception as e:
     logger.exception(e)
     raise e

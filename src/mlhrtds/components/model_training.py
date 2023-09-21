@@ -3,6 +3,7 @@ import os
 from mlhrtds import logger
 import joblib
 from catboost import CatBoostRegressor
+from sklearn.model_selection import GridSearchCV
 from mlhrtds.entity.config_entity import *
 
 
@@ -23,7 +24,12 @@ class ModelTrainer:
         # test_y = test_data[[self.config.target_column]]
 
 
-        lr = CatBoostRegressor(verbose=False)
-        lr.fit(train_x, train_y)
+        cr = CatBoostRegressor(verbose=False)
+        parameters = {'depth' : [6,8,10],
+              'learning_rate' : [0.01, 0.05, 0.1],
+              'iterations'    : [30, 50, 100]
+              }
+        grid = GridSearchCV(estimator=cr, param_grid = parameters, cv = 2, n_jobs=-1)
+        grid.fit(train_x, train_y)
 
-        joblib.dump(lr, os.path.join(self.config.root_dir, self.config.model_name))
+        joblib.dump(grid, os.path.join(self.config.root_dir, self.config.model_name))
