@@ -31,4 +31,4 @@ jobs:
     - name: Test with pytest
       run: |
         conda install pytest
-        pytest /home/anonymous/PycharmProjects/MLOps_ML/test.py
+        pytest MLOps_ML/
