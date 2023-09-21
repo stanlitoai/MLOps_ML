@@ -21,7 +21,7 @@
 Clone the repository
 
 ```bash
-https://github.com/stanlito-AI/MLOps_DS
+https://github.com/Stanlito-AI/MLOps_ML.git
 ```
 ### STEP 01- Create a conda environment after opening the repository
 
