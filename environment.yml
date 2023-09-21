@@ -2,7 +2,7 @@ name: my_env
 channels:
   - defaults
 dependencies:
-  - python=3.8
+  - python=3.9
   - pip=23.2.1
   - pip:
     - jupyter==1.0.0
